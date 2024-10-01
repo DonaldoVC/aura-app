@@ -5,9 +5,16 @@ const ChatContext = createContext<MessageContextType | undefined>(undefined);
 
 export const ChatProvider: FC<MessageProviderProps> = ({ children }) => {
   const [messages, setMessages] = useState<MessageTypes[]>([]);
+  const [isTyping, setIsTyping] = useState<boolean>(false);
 
   const saveMessage = (message: MessageTypes) => {
     setMessages(prevState => [...prevState, message]);
+  };
+
+  const checkMessage = (index: number) => {
+    if (index + 1 < messages.length) {
+      setMessages(prevState => prevState.splice(0, index + 1));
+    }
   };
 
   const replaceMessage = (message: string, index: number) => {
@@ -19,7 +26,9 @@ export const ChatProvider: FC<MessageProviderProps> = ({ children }) => {
   };
 
   return (
-    <ChatContext.Provider value={{ messages, saveMessage, replaceMessage }}>
+    <ChatContext.Provider
+      value={{ messages, isTyping, saveMessage, checkMessage, replaceMessage, setIsTyping }}
+    >
       {children}
     </ChatContext.Provider>
   );

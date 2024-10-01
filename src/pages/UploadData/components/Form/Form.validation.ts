@@ -10,5 +10,5 @@ export const formSchema = yup.object().shape({
   }),
   description: yup.string().optional(),
   scope: yup.string().optional(),
-  expert: yup.array().required(),
+  expert: yup.array().min(1).required(),
 });

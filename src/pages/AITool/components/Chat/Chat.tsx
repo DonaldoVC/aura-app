@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FallingLines } from 'react-loader-spinner';
@@ -15,10 +15,10 @@ import { formSchema } from './Chat.validation';
 import styles from './Chat.module.scss';
 
 const Chat: FC = () => {
-  const { messages, saveMessage } = useMessages();
+  const ref = useRef<HTMLDivElement | null>(null);
+  const { messages, saveMessage, isTyping, setIsTyping } = useMessages();
 
   const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(false);
 
   const { register, handleSubmit, reset } = useForm<FormValues>({
     resolver: yupResolver(formSchema),
@@ -26,38 +26,53 @@ const Chat: FC = () => {
 
   const handleLoading = (status: boolean) => {
     setLoading(status);
-    setDisabled && setDisabled(status);
+    setIsTyping(status);
   };
 
   const onSubmit: SubmitHandler<FormValues> = async ({ message }) => {
-    handleLoading(true);
-    reset();
-    saveMessage({
-      message,
-      type: 'message',
-    });
-    const response = await sendMessage(message);
-
-    if (response) {
+    if (!isTyping) {
+      handleLoading(true);
+      reset();
       saveMessage({
-        message: response,
-        type: 'response',
+        message,
+        type: 'message',
+      });
+      const response = await sendMessage(message);
+
+      if (response) {
+        saveMessage({
+          message: response,
+          type: 'response',
+        });
+      }
+      handleLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      if (ref.current) {
+        ref.current.scrollTop = ref.current.scrollHeight;
+      }
+    });
+
+    if (ref.current) {
+      observer.observe(ref.current, {
+        childList: true,
+        subtree: true,
       });
     }
-    handleLoading(false);
-  };
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <div className={styles.container}>
-      <div className={styles.chat}>
+      <div ref={ref} className={styles.chat}>
         {messages.map((message, index) => (
-          <Message
-            key={index}
-            type={message.type}
-            index={index}
-            disabled={disabled}
-            setDisabled={setDisabled}
-          >
+          <Message key={index} type={message.type} index={index}>
             {message.message}
           </Message>
         ))}

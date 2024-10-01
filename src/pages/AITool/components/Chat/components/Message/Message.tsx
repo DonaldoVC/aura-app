@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
-import Markdown from 'markdown-to-jsx';
+import { FallingLines } from 'react-loader-spinner';
+import { marked } from 'marked';
 
 import regenerateIcon from 'assets/icons/regenerate.svg';
 import starIcon from 'assets/icons/star.svg';
@@ -11,13 +12,23 @@ import optionsIcon from 'assets/icons/options.svg';
 
 import { useMessages } from 'pages/AITool/context/Chat/Chat.context';
 import { sendMessage } from 'pages/AITool/utils/genemi';
+import useTypingEffect from 'pages/AITool/hooks/useTyping';
 
 import { MessageProps } from './Message.types';
 import styles from './Message.module.scss';
-import { FallingLines } from 'react-loader-spinner';
 
-const Message: FC<MessageProps> = ({ type, children, index, disabled, setDisabled }) => {
-  const { messages, replaceMessage } = useMessages();
+const Message: FC<MessageProps> = ({ type, children, index }) => {
+  const { messages, isTyping, replaceMessage, checkMessage, setIsTyping } = useMessages();
+  const { displayText } = useTypingEffect(children, 1);
+
+  marked.setOptions({
+    breaks: true,
+    gfm: true,
+  });
+
+  const getMarkdownText = (text: string) => {
+    return { __html: marked(text) as string | TrustedHTML };
+  };
 
   const [loading, setLoading] = useState(false);
 
@@ -27,11 +38,12 @@ const Message: FC<MessageProps> = ({ type, children, index, disabled, setDisable
 
   const handleLoading = (status: boolean) => {
     setLoading(status);
-    setDisabled && setDisabled(status);
+    setIsTyping(status);
   };
 
   const handleRegenerate = async () => {
     handleLoading(true);
+    checkMessage(index);
     const response = await sendMessage(messages[index - 1].message);
 
     if (response) {
@@ -46,67 +58,54 @@ const Message: FC<MessageProps> = ({ type, children, index, disabled, setDisable
         <FallingLines color="#101723FF" width="40" visible={true} />
       ) : (
         <>
-          <div className={styles[type]}>
-            <Markdown
-              options={{
-                overrides: {
-                  code: {
-                    component: ({ children }) => (
-                      <code
-                        style={{
-                          padding: '10px',
-                          borderRadius: '5px',
-                          color: '#dcdcdc',
-                          display: 'block',
-                          margin: '10px 0',
-                          backgroundColor: '#282c34',
-                        }}
-                      >
-                        {children}
-                      </code>
-                    ),
-                  },
-                },
-              }}
-            >
-              {children}
-            </Markdown>
-          </div>
-
-          {type === 'response' && (
-            <div className={styles.options}>
+          {type === 'message' && (
+            <div className={styles[type]}>
               <div>
-                <button onClick={handleRegenerate} disabled={disabled}>
-                  <img src={regenerateIcon} alt="regenerate" width={25} height={25} />
-                </button>
-              </div>
-              <div>
-                <button disabled={disabled}>
-                  <img src={starIcon} alt="favorite" width={25} height={25} />
-                </button>
-              </div>
-              <div>
-                <button onClick={handleCopy} disabled={disabled}>
-                  <img src={copyIcon} alt="copy" width={25} height={25} />
-                </button>
-                <button disabled={disabled}>
-                  <img src={copy2Icon} alt="copy" width={25} height={25} />
-                </button>
-              </div>
-              <div>
-                <button disabled={disabled}>
-                  <img src={likeIcon} alt="like" width={28} height={25} />
-                </button>
-                <button disabled={disabled}>
-                  <img src={dislikeIcon} alt="dislike" width={25} height={25} />
-                </button>
-              </div>
-              <div>
-                <button disabled={disabled}>
-                  <img src={optionsIcon} alt="options" width={25} height={25} />
-                </button>
+                <span>{children}</span>
               </div>
             </div>
+          )}
+
+          {type === 'response' && (
+            <>
+              <div className={styles[type]}>
+                <div dangerouslySetInnerHTML={getMarkdownText(displayText)} />
+              </div>
+
+              <div className={styles.options}>
+                <div>
+                  <button onClick={handleRegenerate} disabled={isTyping}>
+                    <img src={regenerateIcon} alt="regenerate" width={25} height={25} />
+                  </button>
+                </div>
+                <div>
+                  <button disabled={isTyping}>
+                    <img src={starIcon} alt="favorite" width={25} height={25} />
+                  </button>
+                </div>
+                <div>
+                  <button onClick={handleCopy} disabled={isTyping}>
+                    <img src={copyIcon} alt="copy" width={25} height={25} />
+                  </button>
+                  <button disabled={isTyping}>
+                    <img src={copy2Icon} alt="copy" width={25} height={25} />
+                  </button>
+                </div>
+                <div>
+                  <button disabled={isTyping}>
+                    <img src={likeIcon} alt="like" width={28} height={25} />
+                  </button>
+                  <button disabled={isTyping}>
+                    <img src={dislikeIcon} alt="dislike" width={25} height={25} />
+                  </button>
+                </div>
+                <div>
+                  <button disabled={isTyping}>
+                    <img src={optionsIcon} alt="options" width={25} height={25} />
+                  </button>
+                </div>
+              </div>
+            </>
           )}
         </>
       )}

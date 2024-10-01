@@ -29,7 +29,7 @@ export const fetchTopGainers: FetchTopGainers = async () => {
 
     data = data.map(element => ({
       ...element,
-      companyName: element.companyName.slice(0, 10),
+      companyName: element.companyName?.slice(0, 10),
     }));
 
     return data.sort((a, b) => +b.changesPercentage - +a.changesPercentage).slice(0, 8);

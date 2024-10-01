@@ -9,6 +9,6 @@ export const sendMessage = async (message: string) => {
 
     return result.response.text();
   } catch (error) {
-    console.log('Error');
+    console.error(`AI error ${error}`);
   }
 };
