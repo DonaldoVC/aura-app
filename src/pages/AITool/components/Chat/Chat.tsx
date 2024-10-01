@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FallingLines } from 'react-loader-spinner';
 
 import { useMessages } from 'pages/AITool/context/Chat/Chat.context';
-import { sendMessage } from 'pages/AITool/utils/genemi';
+import { sendMessage } from 'pages/AITool/utils/gemini';
 
 import Input from 'components/Form/Input';
 

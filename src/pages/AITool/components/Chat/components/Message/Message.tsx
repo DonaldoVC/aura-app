@@ -11,7 +11,7 @@ import dislikeIcon from 'assets/icons/dislike.svg';
 import optionsIcon from 'assets/icons/options.svg';
 
 import { useMessages } from 'pages/AITool/context/Chat/Chat.context';
-import { sendMessage } from 'pages/AITool/utils/genemi';
+import { sendMessage } from 'pages/AITool/utils/gemini';
 import useTypingEffect from 'pages/AITool/hooks/useTyping';
 
 import { MessageProps } from './Message.types';
