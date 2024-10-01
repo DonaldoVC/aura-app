@@ -1,0 +1,20 @@
+@use "styles/_variables" as *;
+
+.container {
+  background: $main;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.logo {
+  padding-top: 22px;
+  padding-left: 37px;
+};
+
+.form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+};

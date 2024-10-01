@@ -1,0 +1,47 @@
+@use "styles/variables" as *;
+
+.form {
+  padding-top: 25px;
+  width: 100%;
+  font-family: Arial, serif;
+
+  & > div {
+    & > * {
+      margin-bottom: 12px;
+    }
+
+    & > .checkbox {
+      width: 462px;
+      margin-bottom: 15px;
+
+      & > span {
+        margin-bottom: 10px;
+        display: block;
+
+        & > span {
+          color: $error;
+        }
+      }
+
+      & > div {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        gap: 10px;
+      }
+    }
+  }
+
+  & > .buttons {
+    display: flex;
+
+    & > button {
+      margin-right: 15px;
+      padding: 0 50px;
+    }
+
+    & > .upload {
+      font-weight: bold;
+      background-color: $purple-200;
+    }
+  }
+}

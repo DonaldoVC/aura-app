@@ -1,0 +1,48 @@
+@use "styles/variables" as *;
+
+.container {
+  width: 100%;
+
+  & > label {
+    font-size: 16px;
+    font-weight: 500;
+    color: $grey-600;
+
+    & > span {
+      color: $error;
+    }
+  }
+
+  & > .hasError {
+    border: 0.5px solid $error;
+  }
+
+  & > input {
+    margin-top: 5px;
+    height: 45px;
+    font-size: 16px;
+    border: 0.5px solid $grey-200;
+    border-radius: 5px;
+    padding: 0 10px;
+    width: calc(100% - 20px);
+    background-color: $white;
+  }
+
+  & > input:focus {
+    border: 0.5px solid $grey-200;
+    outline: none;
+  }
+
+  & > input::placeholder {
+    color: $grey-200;
+    font-weight: bold;
+  }
+
+  & > .error {
+    height: 15.5px;
+
+    & > small {
+      color: $error;
+    }
+  }
+};

@@ -1,0 +1,22 @@
+@use "styles/_variables" as *;
+
+.container {
+  background-color: $purple-100;
+  width: calc(438px - 6px * 2);
+  height: calc(272px - 16px * 2);
+  max-height: calc(272px - 16px * 2);
+  padding: 16px 6px;
+  border-radius: 4px;
+  position: relative;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  & > * {
+    flex: 1 1 auto;
+    min-width: calc(40% - 10px * 2);
+    height: fit-content;
+    max-width: fit-content;
+    margin: 0 10px;
+  }
+}

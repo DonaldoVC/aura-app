@@ -1,0 +1,42 @@
+@use "styles/_variables" as *;
+
+.container {
+  width: 100%;
+
+  & > .message {
+    background-color: $purple-100;
+    width: calc(100% - 10px * 2);
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 15px;
+
+    & > span {
+      font-family: "Sansation", serif;
+      font-weight: bold;
+      font-size: 16px;
+      color: $black;
+    }
+  }
+
+  & > .response {
+    width: 100%;
+    margin-bottom: 15px;
+    font-family: Arial, serif;
+    color: $black;
+  }
+
+  & > .options {
+    display: flex;
+    margin-bottom: 15px;
+
+    & > div {
+      margin-right: 25px;
+
+      & > button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  }
+}

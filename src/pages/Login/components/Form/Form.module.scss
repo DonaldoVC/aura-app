@@ -1,0 +1,49 @@
+@use "styles/_variables" as *;
+
+.container {
+  width: 320px;
+
+  & label {
+    color: $white;
+  };
+
+  & .input {
+    width: 100%;
+    margin-bottom: 40px;
+  };
+
+  & input:focus {
+    border: none;
+    outline: none;
+  }
+}
+
+.title {
+  text-align: center;
+  color: $white;
+  font-size: 48px;
+  margin-bottom: 50px;
+};
+
+@mixin input {
+  margin-top: 5px;
+  height: 45px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+.continueButton {
+  @include input;
+
+  width: 100%;
+  color: $white;
+  font-weight: 800;
+  background-color: $grey-800;
+  cursor: pointer;
+}
+.continueButton:disabled {
+  color: $grey-300;
+  cursor: default;
+}

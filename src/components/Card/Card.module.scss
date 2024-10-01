@@ -1,0 +1,18 @@
+@use "styles/_variables" as *;
+
+.container {
+  width: 180px;
+  height: 180px;
+  background-color: $white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+
+  & > div > p {
+    margin: 0;
+    font-size: 18px;
+    color: $grey-600;
+  }
+}

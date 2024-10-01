@@ -1,0 +1,45 @@
+@use "styles/_variables" as *;
+
+.container {
+  display: flex;
+  padding-top: 10px;
+  justify-content: center;
+  width: 100%;
+
+  & > * {
+    flex: 0 1 auto;
+    margin: 0 15px;
+  }
+
+  & > .info {
+    width: 498px;
+
+    & > .username {
+      color: $purple-800;
+      margin-top: 0;
+      font-size: 35px;
+    }
+
+    & > .welcome {
+      font-size: 22px;
+    }
+
+    & > .text {
+      font-size: 18px;
+    }
+
+    & > .begin {
+      margin-top: 15px;
+      border-radius: 5px;
+      width: fit-content;
+      padding: 10px 20px;
+      border: 1px $black solid;
+      font-size: 22px;
+    }
+  }
+
+  & > .img {
+    text-align: right;
+    width: 400px;
+  }
+}

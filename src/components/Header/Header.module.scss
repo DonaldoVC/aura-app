@@ -1,0 +1,48 @@
+@use "styles/_variables" as *;
+
+.container {
+  width: 100%;
+  height: 397px;
+  background-image: url('../../assets/images/background.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgb(0, 0, 0, 0.6);
+  display: flex;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  margin-bottom: 100px;
+
+  & > div {
+    width: 100%;
+    color: $white;
+    text-align: center;
+    padding-top: 26px;
+
+    & > .title {
+      font-size: 32px;
+    }
+
+    & > .subtitle {
+      font-size: 24px;
+      margin-bottom: 0;
+    }
+
+    & > .text {
+      font-size: 16px;
+      margin-top: 8px;
+    }
+
+    & > .list {
+      display: flex;
+      padding-top: 10px;
+      justify-content: center;
+      width: 100%;
+
+      & > * {
+        flex: 0 1 auto;
+        margin: 0 15px;
+      }
+    }
+  }
+}

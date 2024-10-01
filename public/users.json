@@ -1,0 +1,22 @@
+[
+  {
+    "email": "user@google.com",
+    "username": "Donaldo VC",
+    "password": "122345678Aqw"
+  },
+  {
+    "email": "user1@google.com",
+    "username": "John",
+    "password": "122345678Aqw"
+  },
+  {
+    "email": "user2@google.com",
+    "username": "John",
+    "password": "122345678Aqw"
+  },
+  {
+    "email": "user3@google.com",
+    "username": "John",
+    "password": "122345678Aqw"
+  }
+]

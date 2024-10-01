@@ -1,0 +1,34 @@
+@use "styles/_variables" as *;
+
+.symbol {
+  font-weight: bold;
+}
+
+.plusIcon {
+  margin-left: 8px;
+}
+
+.cardBottom {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  bottom: 10px;
+  min-width: calc(438px - 16px * 2);
+
+  & > span {
+    font-family: Arial, serif;
+    font-weight: bold;
+    color: $grey-700;
+    font-size: 14px;
+  }
+
+  & > button {
+    font-family: Arial, serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: $grey-700;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+}

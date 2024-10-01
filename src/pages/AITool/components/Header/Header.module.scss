@@ -1,0 +1,33 @@
+@use "styles/_variables" as *;
+
+.container {
+  position: fixed;
+  height: 80px;
+  width: calc(100% - 80px);
+  background-color: $white;
+  padding-top: 10px;
+  z-index: 100;
+
+  & > div {
+    padding-top: 10px;
+    position: relative;
+    text-align: center;
+
+    & > .back {
+      top: 24px;
+      position: absolute;
+      background-color: $white;
+      border: none;
+      display: flex;
+      align-items: center;
+      font-family: "Sansation", serif;
+      font-size: 16px;
+      font-weight: bold;
+      color: $black;
+    }
+
+    & > .title {
+      font-size: 24px;
+    }
+  }
+}

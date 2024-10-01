@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+
+  & > .children {
+    width: 100%;
+    margin-left: 104px;
+    height: 100vh;
+    font-family: "Sansation", serif;
+  }
+}
