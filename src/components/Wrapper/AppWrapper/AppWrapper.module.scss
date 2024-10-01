@@ -1,10 +1,11 @@
 .container {
   display: flex;
+  height: 100%;
 
   & > .children {
     width: 100%;
     margin-left: 104px;
-    height: 100vh;
+    height: 100%;
     font-family: "Sansation", serif;
   }
 }

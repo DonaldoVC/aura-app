@@ -26,6 +26,8 @@ const Searcher: FC = () => {
             setCompanies(data);
           }
         });
+      } else {
+        setCompanies([]);
       }
     },
     500,

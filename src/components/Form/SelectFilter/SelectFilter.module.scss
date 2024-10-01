@@ -21,7 +21,8 @@
     border-radius: 4px;
     position: absolute;
     z-index: 10;
-    height: 135px;
+    max-height: 135px;
+    min-height: 10px;
     display: block;
     overflow: auto;
     width: 100%;

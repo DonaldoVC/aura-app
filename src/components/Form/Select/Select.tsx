@@ -39,8 +39,12 @@ const Select: FC<SelectTypes> = ({
     }
   };
 
-  const handleSelect = (option: any) => {
+  const handleShopOptions = () => {
     setShowOptions(prevState => !prevState);
+  };
+
+  const handleSelect = (option: any) => {
+    handleShopOptions();
     onSelect(option);
   };
 
@@ -51,10 +55,7 @@ const Select: FC<SelectTypes> = ({
           {label} {required && <span>*</span>}
         </label>
       )}
-      <div
-        className={`${styles.value} ${error && styles.hasError}`}
-        onClick={() => setShowOptions(true)}
-      >
+      <div className={`${styles.value} ${error && styles.hasError}`} onClick={handleShopOptions}>
         <span>{value}</span>
       </div>
 
@@ -67,6 +68,7 @@ const Select: FC<SelectTypes> = ({
           alt="arrow"
           width={24}
           height={24}
+          onClick={handleShopOptions}
         />
       )}
 

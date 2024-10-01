@@ -5,10 +5,13 @@ import iconClose from 'assets/icons/close.svg';
 
 import { ModalProps } from './Modal.types';
 import styles from './Modal.module.scss';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 const Modal: FC<ModalProps> = ({ handleClose, title, className, children }) => {
+  const ref = useOutsideClick(handleClose);
+
   return createPortal(
-    <div className={`${styles.container} ${className}`}>
+    <div ref={ref} className={`${styles.container} ${className}`}>
       <div className={styles.header}>
         <span className={styles.title}>{title}</span>
 
