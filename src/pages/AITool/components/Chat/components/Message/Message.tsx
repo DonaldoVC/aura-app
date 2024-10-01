@@ -19,7 +19,7 @@ import styles from './Message.module.scss';
 
 const Message: FC<MessageProps> = ({ type, children, index }) => {
   const { messages, isTyping, replaceMessage, checkMessage, setIsTyping } = useMessages();
-  const { displayText } = useTypingEffect(children, 50);
+  const { displayText } = useTypingEffect(children, 500);
 
   marked.setOptions({
     breaks: true,
